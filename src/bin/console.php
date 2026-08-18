@@ -35,7 +35,6 @@ function getFlag(array $args, string $name): ?string
     return null;
 }
 
-// $argv[0] to zawsze nazwa skryptu, więc go pomijamy.
 $args = array_slice($argv, 1);
 $command = $args[0] ?? null;
 
