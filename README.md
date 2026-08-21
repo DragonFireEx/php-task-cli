@@ -1,16 +1,16 @@
 # php-task-cli
 
-Prosty CLI w PHP do zarządzania listą zadań, z zapisem do pliku CSV. Projekt stworzony w ramach nauki PHP — obejmuje OOP, obsługę plików, parsowanie argumentów CLI, obsługę błędów i konteneryzację przez Dockera.
+A simple PHP CLI for managing a task list, with CSV file storage. Built as a PHP learning project — covers OOP, file handling, CLI argument parsing, error handling, and containerization with Docker.
 
-## Funkcjonalności
+## Features
 
-- Wczytywanie listy zadań z pliku CSV
-- Dodawanie nowego zadania z argumentu CLI
-- Filtrowanie zadań po statusie
-- Zapis wyniku z powrotem do pliku
-- Czytelne komunikaty przy błędnych argumentach
+- Load task list from a CSV file
+- Add a new task via CLI argument
+- Filter tasks by status
+- Save results back to the file
+- Readable error messages for invalid arguments
 
-## Struktura projektu
+## Project structure
 
 ```
 php-task-cli/
@@ -24,78 +24,78 @@ php-task-cli/
     └── console.php
 ```
 
-## Wymagania
+## Requirements
 
 - PHP >= 8.1
 - [Composer](https://getcomposer.org/)
 
-Alternatywnie: Docker + Docker Compose (patrz sekcja niżej).
+Alternatively: Docker + Docker Compose (see below).
 
-## Instalacja
+## Installation
 
 ```bash
-git clone https://github.com/twoj-nick/php-task-cli.git
+git clone https://github.com/your-username/php-task-cli.git
 cd php-task-cli
 composer install
 ```
 
-## Użycie
+## Usage
 
 ```bash
 php bin/console.php list [--status=STATUS]
-php bin/console.php add "Tytuł zadania" [--status=STATUS]
+php bin/console.php add "Task title" [--status=STATUS]
 php bin/console.php help
 ```
 
-### Przykłady
+### Examples
 
-Dodanie zadania:
+Add a task:
 
 ```bash
-php bin/console.php add "Nauczyć się PHP" --status=todo
+php bin/console.php add "Learn PHP" --status=todo
 ```
 
 ```
-Dodano zadanie [1] Nauczyć się PHP (todo)
+Dodano zadanie [1] Learn PHP (todo)
 ```
 
-Wyświetlenie wszystkich zadań:
+List all tasks:
 
 ```bash
 php bin/console.php list
 ```
 
-Wyświetlenie zadań z konkretnym statusem:
+List tasks with a specific status:
 
 ```bash
 php bin/console.php list --status=todo
 ```
 
-Dane są zapisywane w `data/tasks.csv`.
+Data is stored in `data/tasks.csv`.
 
-## Uruchamianie przez Docker
+## Running with Docker
 
-Projekt zawiera gotowy `Dockerfile` i `docker-compose.yml` — nie musisz mieć zainstalowanego PHP ani Composera lokalnie.
+The project ships with a ready-to-use `Dockerfile` and `docker-compose.yml` — no local PHP or Composer installation required.
 
-Budowanie obrazu:
+Build the image:
 
 ```bash
 docker compose build
 ```
 
-Uruchamianie komend:
+Run commands:
 
 ```bash
-docker compose run --rm cli add "Zadanie z Dockera" --status=todo
+docker compose run --rm cli add "Task from Docker" --status=todo
 docker compose run --rm cli list
 ```
 
-Folder `data/` jest zamontowany jako wolumen, więc `tasks.csv` zapisuje się na Twoim dysku i przetrwa mimo że każdy kontener jest jednorazowy (`--rm`).
+The `data/` folder is mounted as a volume, so `tasks.csv` persists on your machine even though each container is disposable (`--rm`).
 
-## Obsługa błędów
+## Error handling
 
-Program zwraca kod wyjścia `0` przy sukcesie i `1` przy błędzie (np. brak tytułu zadania, nieznana komenda), z czytelnym komunikatem wypisanym na `STDERR`.
+The program exits with code `0` on success and `1` on error (e.g. missing task title, unknown command), printing a readable message to `STDERR`.
 
-## Licencja
+## License
 
 MIT
